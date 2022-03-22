@@ -22,6 +22,13 @@ resource "aws_security_group" "wd_sg" {
     protocol    = "tcp"
     cidr_blocks = var.ingress_cidr
   }
+  
+   ingress {
+    from_port   = 18000
+    to_port     = 18000
+    protocol    = "tcp"
+    cidr_blocks = var.ingress_cidr
+  }
 
   ingress {
     from_port   = 0
