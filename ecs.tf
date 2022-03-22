@@ -128,3 +128,15 @@ resource "aws_lb_listener" "waggledance" {
     type             = "forward"
   }
 }
+
+resource "aws_lb_listener" "waggledance-prometheus" {
+  count             = var.wd_instance_type == "ecs" && var.enable_autoscaling ? 1 : 0
+  load_balancer_arn = aws_lb.waggledance[0].arn
+  protocol          = "HTTP"
+  port              = 18000
+
+  default_action {
+    target_group_arn = aws_lb_target_group.waggledance[0].arn
+    type             = "forward"
+  }
+}
