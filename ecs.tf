@@ -132,7 +132,7 @@ resource "aws_lb_listener" "waggledance" {
 resource "aws_lb_listener" "waggledance-prometheus" {
   count             = var.wd_instance_type == "ecs" && var.enable_autoscaling ? 1 : 0
   load_balancer_arn = aws_lb.waggledance[0].arn
-  protocol          = "HTTP"
+  protocol          = "TCP"
   port              = 18000
 
   default_action {
